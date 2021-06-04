@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Node + Vue + socket.io</title>
+    
+    <!--Agregamos los estilos de bootstrap-->
+    <link rel="stylesheet" href="./bootstrap 5/css/bootstrap5.min.css">
+    
+    <!--Agregamos mis estilos-->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <main class="container" id="app">
+        <div v-if="nick!=''" class="row mt-4">
+            <div class="col-md-2">
+                <div class="card card-body bg-secondary text-white">
+                    <p>Entraste al chat como: {{nick}}</p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card rounded-0 chat">
+                    <div class="card-header">
+                        <h4 class="text-center">Live Chat Node + Vue + sockets</h4>
+                    </div>
+                    <div class="card-body chat-container p-2">
+                    
+                        <div v-for="item in messages" class="w-100 d-flex mb-1">
+                            <img v-if="item.nick != nick" class="chat-profile rounded-1" :src="item.img">
+                                <div :class="{ ' message-user': item.nick == nick }" class="message rounded-1 p-2">
+                                    <small class="fw-bolder mb-0">{{item.nick}}</small><br>
+                                    {{item.message}}
+                                    <br>
+                                    <small class="text-ligth date ml-auto fw-lighter">Enviado a las {{item.date}}</small>
+                                </div>
+                                
+                            <img v-if="item.nick == nick" class="chat-profile rounded-1" :src="item.img">
+                        </div>
+                        
+                    </div>
+                    <div class="card-footer bg-muted container-fluid">
+                        <div class="row">
+                            <div class="col-lg-10 col-8 p-0">
+                                <input v-model="message" class="form-control rounded-0 border-0" type="text">
+                            </div>
+                            <div class="col-lg-2 col-4 p-0 bg-muted">
+                                <div class="d-grid gap-2">
+                                    <button v-on:click="enviarMensaje" id="btn-chat" class="btn text-white form-control rounded-0 border-0">Send</button>
+                                </div>                                 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else class="row mt-4">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 mt-5">
+                <div class="card card-body p-2 mt-5">
+                    <label>Define un Nick para entrar al chat</label><br>
+                    <input v-model="nickTemp" class="form-control" type="text" placeholder="Escribe tu nick">
+                    <div class="d-grid gap-2 mb-1 mt-1">
+                        <button v-on:click="definirNick" class="btn btn-success">Usar este nick</button>
+                    </div>
+                    <div v-if="messageAlert != ''" class="alert alert-danger" role="alert">
+                        {{messageAlert}}
+                      </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!--Agregamos vue-->
+        <script src="./vue/vue.js"></script>
+        
+        <!--Argregamos el socket-->
+        <script src="/socket.io/socket.io.js"></script>
+        
+        <!--Agregamos mis codigos js-->
+        <script src="./js/app.js"></script>
+    </footer>
+</body>
+</html>

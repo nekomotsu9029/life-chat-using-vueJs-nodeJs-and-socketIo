@@ -1,0 +1,38 @@
+.chat{
+    height: 600px;
+}
+.chat-profile{
+    width: 50px !important;
+    height: 50px !important;
+    float: right;
+    margin: 0px 5px 5px 5px;
+}
+.chat > .card-header{
+    background-color: #05728f;
+    color: white;
+}
+.chat > .card-body{
+    overflow-y: scroll;
+}
+.chat > .card-footer{
+    height: 50px;
+}
+.chat > .card-footer > .row > .col-lg-2 > .d-grid > button{
+    background-color: #05728f;
+}
+.message{
+    width: 50% !important;
+    background-color: #ebebeb;
+    color: #6c757d;
+}
+.message > small.date{
+    float: right;
+}
+.ml-auto{
+    margin-left: auto;
+}
+.message-user{
+    margin-left: auto;
+    background-color: #05728f !important;
+    color: white !important;
+}
